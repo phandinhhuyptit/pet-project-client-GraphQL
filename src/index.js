@@ -3,8 +3,29 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { Router} from 'react-router-dom';
+import { createBrowserHistory } from "history";
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from 'react-apollo';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const history = createBrowserHistory()
+
+// apollo client setup
+const client = new ApolloClient({
+    uri: 'http://localhost:4000/graphql'
+});
+
+
+
+
+ReactDOM.render(
+<ApolloProvider client={client}>
+<Router history={history} >    
+<App />
+</Router>
+</ApolloProvider>    
+
+, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
